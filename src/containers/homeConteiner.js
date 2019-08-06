@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import paginate from "paginate-array";
 
 import { getArticlesList } from "../redux/articles/actions";
 import selectArticles from "../redux/articles/selectors";
-import paginate from "paginate-array";
 
 import { setCurrentPage, setPage, setSize } from "../redux/pagination/actions";
 import selectPagination from "../redux/pagination/selectors";
+
+import { addArticleToCart, removeArticleFromCart } from "../redux/cart/actions";
+import selectCart from "../redux/cart/selectors";
 
 import { Home } from "../ui/pages/Home";
 
@@ -81,10 +84,12 @@ class HomeContainer extends React.Component {
 const mapStateToProps = state => {
   const articles = selectArticles(state);
   const pagination = selectPagination(state);
+  const cart = selectCart(state);
 
   return {
     articles,
-    pagination
+    pagination,
+    cart
   };
 };
 
@@ -92,8 +97,9 @@ const mapActionsToDispatch = dispatch => ({
   getArticlesList: () => dispatch(getArticlesList()),
   setCurrentPage: currPage => dispatch(setCurrentPage(currPage)),
   setPage: page => dispatch(setPage(page)),
-  setSize: size => dispatch(setSize(size))
-  // getShopInformation: () => dispatch(getShopInformation())
+  setSize: size => dispatch(setSize(size)),
+  addArticleToCart: article => dispatch(addArticleToCart(article)),
+  removeArticleFromCart: article => dispatch(removeArticleFromCart(article))
 });
 
 const mergeProps = (state, actions) => ({

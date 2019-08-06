@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
-import { Navbar } from "react-bootstrap";
+import React, { Component } from "react";
+import { Navbar, Button, Badge } from "react-bootstrap";
 
-
-const NavBar = () => (
+const NavBar = ({ cart }) => (
   <Navbar bg="dark" variant="dark">
-   <Navbar.Brand href="#home">DocAvenue</Navbar.Brand>
- </Navbar>);
-
+    <Navbar.Brand href="#home">DocAvenue</Navbar.Brand>
+    <Button variant="primary" style={{ position: "absolute", right: "20px" }}>
+      Cart <Badge variant="light">{cart.articles.length}</Badge>
+    </Button>
+  </Navbar>
+);
 
 export default NavBar;
-
-
-
-//https://stackblitz.com/edit/react-lrmsvy?file=TodoList.js
-//https://stackoverflow.com/questions/52541161/howto-add-pagination-with-axios-get-request-in-reactjs

@@ -32,24 +32,23 @@ export class Home extends Component {
   }
 
   renderCard(article) {
-    return <ArticleCard article={article} />;
+    const { addArticleToCart } = this.props;
+    return (
+      <ArticleCard
+        article={article}
+        addArticleToCart={article => addArticleToCart(article)}
+      />
+    );
   }
 
   render() {
-    const {
-      articles,
-      pagination,
-      previousPage,
-      nextPage,
-      setSize
-    } = this.props;
-
-    const selection = Array.from(articles).slice(1, 5);
+    const { pagination, previousPage, nextPage, setSize, cart } = this.props;
 
     return (
       <div className="c-home">
-        <NavBar />
+        <NavBar cart={cart} />
         <Container>
+          <p>cart {JSON.stringify(cart)}</p>
           <Row
             style={{
               marginTop: "40px",
@@ -63,6 +62,7 @@ export class Home extends Component {
                   <select name="size" id="size" onChange={e => setSize(e)}>
                     <option value="5">5</option>
                     <option value="10">10</option>
+                    <option value="15">15</option>
                     <option value="25">25</option>
                   </select>
                 </ButtonGroup>
