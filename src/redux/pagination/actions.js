@@ -6,6 +6,9 @@ export const setCurrentPage = currentPage => {
 };
 
 export const setPage = page => {
-  console.log("page", page);
   return { type: paginationActions.SET_PAGE, payload: page };
+};
+
+export const setSize = size => {
+  return { type: paginationActions.SET_SIZE, payload: size };
 };

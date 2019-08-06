@@ -5,7 +5,7 @@ import { getArticlesList } from "../redux/articles/actions";
 import selectArticles from "../redux/articles/selectors";
 import paginate from "paginate-array";
 
-import { setCurrentPage, setPage } from "../redux/pagination/actions";
+import { setCurrentPage, setPage, setSize } from "../redux/pagination/actions";
 import selectPagination from "../redux/pagination/selectors";
 
 import { Home } from "../ui/pages/Home";
@@ -30,20 +30,51 @@ class HomeContainer extends React.Component {
     }
   }
 
-  nextPage() {
-    const { setCurrentPage, articles, pagination } = this.props;
-    console.log("pagination nextPage", pagination);
-
-    if (pagination.page < pagination.currentPage.totalPages) {
-      const newPage = pagination.page++;
+  previousPage() {
+    const { setCurrentPage, setPage, articles, pagination } = this.props;
+    if (pagination.page > 1) {
+      const newPage = pagination.page - 1;
       const newCurrPage = paginate(articles, newPage, pagination.size);
       setPage(newPage);
       setCurrentPage(newCurrPage);
     }
   }
 
+  nextPage() {
+    const { setCurrentPage, setPage, articles, pagination } = this.props;
+    console.log("pagination nextPage", pagination.page);
+
+    if (pagination.page < pagination.currentPage.totalPages) {
+      const newPage = pagination.page + 1;
+      console.log("newPage", newPage);
+      const newCurrPage = paginate(articles, newPage, pagination.size);
+      setPage(newPage);
+      setCurrentPage(newCurrPage);
+    }
+  }
+
+  setSize(e) {
+    const { value } = e.target;
+    const { articles, setSize, setPage, setCurrentPage } = this.props;
+
+    const newSize = +value;
+    const newPage = 1;
+    const newCurrPage = paginate(articles, newPage, newSize);
+
+    setSize(newSize);
+    setPage(newPage);
+    setCurrentPage(newCurrPage);
+  }
+
   render() {
-    return <Home {...this.props} nextPage={() => this.nextPage()} />;
+    return (
+      <Home
+        {...this.props}
+        nextPage={() => this.nextPage()}
+        previousPage={() => this.previousPage()}
+        setSize={e => this.setSize(e)}
+      />
+    );
   }
 }
 
@@ -60,7 +91,8 @@ const mapStateToProps = state => {
 const mapActionsToDispatch = dispatch => ({
   getArticlesList: () => dispatch(getArticlesList()),
   setCurrentPage: currPage => dispatch(setCurrentPage(currPage)),
-  setPage: page => dispatch(setPage(page))
+  setPage: page => dispatch(setPage(page)),
+  setSize: size => dispatch(setSize(size))
   // getShopInformation: () => dispatch(getShopInformation())
 });
 

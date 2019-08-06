@@ -28,7 +28,13 @@ export class Home extends Component {
   }
 
   render() {
-    const { articles, pagination, previousPage, nextPage } = this.props;
+    const {
+      articles,
+      pagination,
+      previousPage,
+      nextPage,
+      setSize
+    } = this.props;
 
     const selection = Array.from(articles).slice(1, 5);
 
@@ -38,6 +44,11 @@ export class Home extends Component {
         <Container>
           <div>page: {pagination.page}</div>
           <div>size: {pagination.size}</div>
+          <select name="size" id="size" onChange={e => setSize(e)}>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+          </select>
           <button onClick={previousPage}>Previous Page</button>
           <button onClick={nextPage}>Next Page</button>
           {pagination.currentPage
