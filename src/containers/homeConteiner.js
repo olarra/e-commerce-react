@@ -3,35 +3,64 @@ import { connect } from "react-redux";
 
 import { getArticlesList } from "../redux/articles/actions";
 import selectArticles from "../redux/articles/selectors";
+import paginate from "paginate-array";
 
-// import { getShopInformation } from "@redux/shop/actions";
-// import selectShop from "@redux/shop/selectors";
+import { setCurrentPage, setPage } from "../redux/pagination/actions";
+import selectPagination from "../redux/pagination/selectors";
 
- import {Home} from "../ui/pages/Home";
-
+import { Home } from "../ui/pages/Home";
 
 class HomeContainer extends React.Component {
   componentDidMount() {
-    const { getArticlesList } = this.props;
+    const { getArticlesList, articles, pagination } = this.props;
     getArticlesList();
+
+    // const currPage = paginate(articles, pagination.page, pagination.size);
+    // setCurrentPage(currPage);
+
     // getShopInformation();
   }
+
+  componentDidUpdate(prevProps) {
+    const { setCurrentPage, articles, pagination } = this.props;
+    if (articles !== prevProps.articles) {
+      const currPage = paginate(articles, pagination.page, pagination.size);
+      console.log("currPage", currPage);
+      setCurrentPage(currPage);
+    }
+  }
+
+  nextPage() {
+    const { setCurrentPage, articles, pagination } = this.props;
+    console.log("pagination nextPage", pagination);
+
+    if (pagination.page < pagination.currentPage.totalPages) {
+      const newPage = pagination.page++;
+      const newCurrPage = paginate(articles, newPage, pagination.size);
+      setPage(newPage);
+      setCurrentPage(newCurrPage);
+    }
+  }
+
   render() {
-    return <Home {...this.props} />;
+    return <Home {...this.props} nextPage={() => this.nextPage()} />;
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const articles = selectArticles(state);
-  // const shop = selectShop(state);
+  const pagination = selectPagination(state);
 
   return {
-    articles: articles || []
+    articles,
+    pagination
   };
 };
 
-const mapActionsToDispatch = (dispatch) => ({
-  getArticlesList: () => dispatch(getArticlesList())
+const mapActionsToDispatch = dispatch => ({
+  getArticlesList: () => dispatch(getArticlesList()),
+  setCurrentPage: currPage => dispatch(setCurrentPage(currPage)),
+  setPage: page => dispatch(setPage(page))
   // getShopInformation: () => dispatch(getShopInformation())
 });
 

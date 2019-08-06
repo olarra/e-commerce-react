@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { Navbar } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 
-const ArticleCard = ({title, thumbnailUrl}) => (
+const ArticleCard = ({article}) => (
   <Card style={{ width: "12rem", minHeight: "350px" }}>
-      <Card.Img variant="top" src={thumbnailUrl} />
+      <Card.Img variant="top" src={article.thumbnailUrl} />
       <Card.Body>
-        <Card.Title style={{fontSize:"12px",  minHeight: "50px" }}>{article}</Card.Title>
+        <Card.Title style={{fontSize:"12px",  minHeight: "50px" }}>{article.title}</Card.Title>
         <Button variant="primary">Add to cart</Button>
       </Card.Body>
-    </Card>
-  );
+    </Card>);
 
 
 export default ArticleCard;

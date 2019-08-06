@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Navbar } from "react-bootstrap";
 
 
-const Card = () => (
+const NavBar = () => (
   <Navbar bg="dark" variant="dark">
    <Navbar.Brand href="#home">DocAvenue</Navbar.Brand>
  </Navbar>);
