@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Main from "../components/Main";
 // import SideBar from "../components/SideBar";
-import { Container, Row, Col, Pagination } from "react-bootstrap";
+import { Container, Row, Col,Card, Pagination, Button } from "react-bootstrap";
 import NavBar from '../common/NavBar'
 export class Home extends Component {
 
@@ -9,15 +9,19 @@ export class Home extends Component {
     return (<div>No Articles</div>)
   }
   renderList(articles) {
-    return articles.map(article => (
+    return articles.map(article => this.renderCard(article));
+  }
 
-      <div key={article.id}>
-        <hr />
-        <h4>{article.title}</h4>
-        <small>id:{article.id}</small>
-        <p>{article.content}</p>
-      </div>
-    ))
+  renderCard(article) {
+    return (
+      <Card style={{ width: '16rem' }}>
+        <Card.Img variant="top" src={article.thumbnailUrl} />
+        <Card.Body>
+          <Card.Title>{article.title}</Card.Title>
+          <Button variant="primary">Add to cart</Button>
+        </Card.Body>
+      </Card>
+      );
   }
 
   render() {

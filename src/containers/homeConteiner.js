@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
   // const shop = selectShop(state);
 
   return {
-    articles: articles || []
+    articles: articles.slice(0,10) || []
   };
 };
 
