@@ -7,7 +7,7 @@ import selectArticles from "../redux/articles/selectors";
 // import { getShopInformation } from "@redux/shop/actions";
 // import selectShop from "@redux/shop/selectors";
 
- import Home from "../ui/pages/Home";
+ import {Home} from "../ui/pages/Home";
 
 
 class HomeContainer extends React.Component {
