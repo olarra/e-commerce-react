@@ -1,19 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getArticleList } from "../../redux/articles/actions";
-import selectArticles from "../../redux/articles/selectors";
+import { getArticlesList } from "../redux/articles/actions";
+import selectArticles from "../redux/articles/selectors";
 
 // import { getShopInformation } from "@redux/shop/actions";
 // import selectShop from "@redux/shop/selectors";
 
- import Home from "../pages/Home";
+ import Home from "../ui/pages/Home";
 
 
 class HomeContainer extends React.Component {
   componentDidMount() {
-    const { getProductsList } = this.props;
-    getProductsList();
+    const { getArticlesList } = this.props;
+    getArticlesList();
     // getShopInformation();
   }
   render() {
@@ -31,7 +31,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapActionsToDispatch = (dispatch) => ({
-  getArticleList: () => dispatch(getArticleList())
+  getArticlesList: () => dispatch(getArticlesList())
   // getShopInformation: () => dispatch(getShopInformation())
 });
 

@@ -4,7 +4,7 @@ import articlesService from "./services";
 /* Sync Action Creators */
 export const setArticles = articles => {
   return {
-    type: articlesActions.SET_PRODUCTS,
+    type: articlesActions.SET_ARTICLES,
     payload : {
       articles
     }
