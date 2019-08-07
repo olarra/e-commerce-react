@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import paginate from "paginate-array";
 
-import { getArticlesList } from "../redux/articles/actions";
+import { getArticlesList, markAsSold } from "../redux/articles/actions";
 import selectArticles from "../redux/articles/selectors";
 
 import { setCurrentPage, setPage, setSize } from "../redux/pagination/actions";
@@ -98,6 +98,7 @@ const mapActionsToDispatch = dispatch => ({
   setCurrentPage: currPage => dispatch(setCurrentPage(currPage)),
   setPage: page => dispatch(setPage(page)),
   setSize: size => dispatch(setSize(size)),
+  markAsSold : article => dispatch(markAsSold(article)),
   addArticleToCart: article => dispatch(addArticleToCart(article)),
   removeArticleFromCart: article => dispatch(removeArticleFromCart(article))
 });

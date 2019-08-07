@@ -32,11 +32,12 @@ export class Home extends Component {
   }
 
   renderCard(article) {
-    const { addArticleToCart } = this.props;
+    const { addArticleToCart, markAsSold } = this.props;
     return (
       <ArticleCard
         article={article}
         addArticleToCart={article => addArticleToCart(article)}
+        markAsSold={article => markAsSold(article)}
       />
     );
   }

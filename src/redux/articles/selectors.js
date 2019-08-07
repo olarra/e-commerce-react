@@ -1,1 +1,1 @@
-export default (state) => state.articles;
+export default (state) => state.articles.articles;
