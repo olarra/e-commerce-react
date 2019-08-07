@@ -45,8 +45,6 @@ export class Cart extends Component {
     return (
       <div className="c-home">
         <NavBar cart={cart} />
-        <p>test {JSON.stringify(articles.slice(1, 5))}</p>
-
         <Container>
           {cart.articles.length ? this.renderList(cart) : this.renderEmpty()}
         </Container>

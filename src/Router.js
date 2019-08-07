@@ -3,7 +3,6 @@ import HomeContainer from "./containers/homeConteiner";
 import CartContainer from "./containers/cartConteiner";
 
 import NoMatch from "./ui/pages/NoMatch";
-import App from "./App";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
