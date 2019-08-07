@@ -6,8 +6,10 @@ import ReactDOM from 'react-dom';
 import { configureStore } from "./redux/store";
 import { Provider } from "react-redux";
 
-import HomeContainer from "./containers/homeConteiner";
+
+import Router from './Router';
+
 
 ReactDOM.render(  <Provider store={configureStore()}>
-    <HomeContainer />
+    <Router />
   </Provider>, document.getElementById('root'));
