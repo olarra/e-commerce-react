@@ -10,6 +10,7 @@ export const addArticleToCart = article => {
 };
 
 export const removeArticleFromCart = article => {
+  console.log("remove",article)
   return {
     type: cartActions.REMOVE_PRODUCT_FROM_CART,
     payload: article

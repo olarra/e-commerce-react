@@ -1,4 +1,5 @@
-import ArticleCard from './ArticleCard';
 import NavBar from './NavBar';
+export * from './ArticleCard';
 
-export { ArticleCard, NavBar };
+
+export { NavBar };
