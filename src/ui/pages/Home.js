@@ -18,8 +18,6 @@ export class Home extends Component {
   }
 
   renderList(pagination) {
-    console.log("pagination", pagination);
-
     return (
       <Row>
         {pagination.currentPage.data.map((article, i) => (
@@ -43,11 +41,19 @@ export class Home extends Component {
   }
 
   render() {
-    const { pagination, previousPage, nextPage, setSize, cart } = this.props;
+    const {
+      pagination,
+      previousPage,
+      nextPage,
+      setSize,
+      cart,
+      articles
+    } = this.props;
 
     return (
       <div className="c-home">
         <NavBar cart={cart} />
+        <p>test {JSON.stringify(articles.slice(1, 5))}</p>
         <Container>
           <Row
             style={{

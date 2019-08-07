@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import paginate from "paginate-array";
 
@@ -13,22 +13,25 @@ import selectCart from "../redux/cart/selectors";
 
 import { Home } from "../ui/pages/Home";
 
+import { withRouter } from "react-router-dom";
+
 class HomeContainer extends React.Component {
   componentDidMount() {
-    const { getArticlesList, articles, pagination } = this.props;
-    getArticlesList();
+    const { getArticlesList, articles } = this.props;
+    articles.length === 0 && getArticlesList();
+  }
 
-    // const currPage = paginate(articles, pagination.page, pagination.size);
-    // setCurrentPage(currPage);
-
-    // getShopInformation();
+  componentWillMount() {
+    const { setCurrentPage, articles, pagination } = this.props;
+    const currPage = paginate(articles, pagination.page, pagination.size);
+    setCurrentPage(currPage);
   }
 
   componentDidUpdate(prevProps) {
     const { setCurrentPage, articles, pagination } = this.props;
+
     if (articles !== prevProps.articles) {
       const currPage = paginate(articles, pagination.page, pagination.size);
-      console.log("currPage", currPage);
       setCurrentPage(currPage);
     }
   }
@@ -45,11 +48,9 @@ class HomeContainer extends React.Component {
 
   nextPage() {
     const { setCurrentPage, setPage, articles, pagination } = this.props;
-    console.log("pagination nextPage", pagination.page);
 
     if (pagination.page < pagination.currentPage.totalPages) {
       const newPage = pagination.page + 1;
-      console.log("newPage", newPage);
       const newCurrPage = paginate(articles, newPage, pagination.size);
       setPage(newPage);
       setCurrentPage(newCurrPage);
@@ -98,7 +99,7 @@ const mapActionsToDispatch = dispatch => ({
   setCurrentPage: currPage => dispatch(setCurrentPage(currPage)),
   setPage: page => dispatch(setPage(page)),
   setSize: size => dispatch(setSize(size)),
-  markAsSold : article => dispatch(markAsSold(article)),
+  markAsSold: article => dispatch(markAsSold(article)),
   addArticleToCart: article => dispatch(addArticleToCart(article)),
   removeArticleFromCart: article => dispatch(removeArticleFromCart(article))
 });
@@ -108,8 +109,10 @@ const mergeProps = (state, actions) => ({
   ...actions
 });
 
-export default connect(
-  mapStateToProps,
-  mapActionsToDispatch,
-  mergeProps
-)(HomeContainer);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapActionsToDispatch,
+    mergeProps
+  )(HomeContainer)
+);

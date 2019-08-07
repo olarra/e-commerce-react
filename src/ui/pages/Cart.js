@@ -30,25 +30,25 @@ export class Cart extends Component {
   }
 
   renderCard(article) {
-    const { removeArticleFromCart } = this.props;
+    const { removeArticleFromCart, markAsAvailable } = this.props;
     return (
       <CartCard
         article={article}
         removeArticleFromCart={article => removeArticleFromCart(article)}
+        markAsAvailable={article => markAsAvailable(article)}
       />
     );
   }
 
   render() {
-    const {  cart } = this.props;
+    const { cart, articles } = this.props;
     return (
       <div className="c-home">
         <NavBar cart={cart} />
-        <Container>
-          {cart.articles.length
-            ? this.renderList(cart)
-            : this.renderEmpty()}
+        <p>test {JSON.stringify(articles.slice(1, 5))}</p>
 
+        <Container>
+          {cart.articles.length ? this.renderList(cart) : this.renderEmpty()}
         </Container>
       </div>
     );

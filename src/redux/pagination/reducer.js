@@ -8,7 +8,6 @@ const initialPagination = {
 };
 
 export default (state = initialPagination, { type, payload }) => {
-  console.log(type);
   switch (type) {
     case actionTypes.SET_CURRENT_PAGE: {
       return { ...state, currentPage: payload };
