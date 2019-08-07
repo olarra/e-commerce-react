@@ -49,7 +49,6 @@ export class Home extends Component {
       <div className="c-home">
         <NavBar cart={cart} />
         <Container>
-          <p>cart {JSON.stringify(cart)}</p>
           <Row
             style={{
               marginTop: "40px",

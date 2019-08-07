@@ -1,1 +1,1 @@
-export default state => state.cart;
+export default state => state.cart
