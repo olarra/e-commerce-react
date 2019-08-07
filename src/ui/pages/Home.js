@@ -41,14 +41,7 @@ export class Home extends Component {
   }
 
   render() {
-    const {
-      pagination,
-      previousPage,
-      nextPage,
-      setSize,
-      cart,
-      articles
-    } = this.props;
+    const { pagination, previousPage, nextPage, setSize, cart } = this.props;
 
     return (
       <div className="c-home">
